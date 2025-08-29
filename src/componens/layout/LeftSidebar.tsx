@@ -1,47 +1,70 @@
-import { useState } from "react";
-import { FaFolder, FaRegHeart } from "react-icons/fa";
-import { IoIosMegaphone } from "react-icons/io";
-import { IoSearch } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
 import { RiFireLine } from "react-icons/ri";
+import React, { useState } from "react";
+import { FiFolderPlus } from "react-icons/fi";
+import { GiOldMicrophone } from "react-icons/gi";
+import { FaRegHeart } from "react-icons/fa";
 import Search from "../../features/search/Search";
 
 
-
-
-interface ListItemProps{
-    title: string;
-    icon: React.ReactNode;
-}
-
-const ListItem: React.FC<ListItemProps> =({title, icon}) => {
-    return(
-         <li className="mt-2"><button className="px-3 py-1.5 border border-gray-300 flex items-center w-full rounded-md cursor-pointer hover:bg-theme group"><span className="mr-3 group-hover:text-red-600">{icon}</span>{title}</button></li>
+const ListItem = ({ title, icon }: {
+    title: string,
+    icon: React.ReactElement
+}) => {
+    return (
+        <li>
+            <button className="px-3 mb-2 py-1.5 border border-gray-200 flex items-center w-full rounded-md cursor-pointer hover:bg-theme">
+                {icon}
+                <span className="ml-3 dark:text-white">{title}</span>
+            </button>
+        </li>
     )
 }
+
 
 function LeftSidebar() {
 
     const [isSearchShow, setIsSearchShow] = useState(false);
+
+    // const handleClick = () => {
+    //     setIsSearchShow((prev) => {
+    //         if(prev == true) {
+    //             return false;
+    //         }
+    //         return true;
+    //     });
+
+    //     setIsSearchShow(!isSearchShow);
+    // }
+
     const isSearchHandler = () => {
-        setIsSearchShow(!isSearchShow);
+        setIsSearchShow(!isSearchShow)
+
     }
 
     return (
-    <div className="p-2 border-r border-r-gray-300 w-[220px] h-full absolute left-0 top-0">
-        <div onClick={() => setIsSearchShow(!isSearchShow)} className="border border-theme rounded-md p-2 relative">
-             <IoSearch className="absolute top-1/2 left-[15px] dark:text-white -translate-1/2"/>
-             <span className="pl-[40px] dark:text-white text-sm">Search book ...</span>
-        </div>
+        <div className="p-2 border-r border-r-gray-300 w-[220px] h-full absolute left-0 top-0">
+            <div onClick={() => setIsSearchShow(!isSearchShow)} className="border-[1.5px] border-theme rounded-md px-2 py-1.5 relative">
+                <IoSearchOutline className="absolute top-1/2 left-[15px] text-3 -translate-1/2 dark:text-white" />
+                <span className="pl-[20px] dark:text-white text-[13px]">Search here ...</span>
+            </div>
 
-        <ul>
-           <ListItem title={"Trending"} icon={<RiFireLine />}/>
-           <ListItem title={"New Releases"} icon={<FaFolder/>}/>
-           <ListItem title={"Coming Soon"} icon={<IoIosMegaphone/>}/>
-           <ListItem title={"Favorites"} icon={<FaRegHeart />}/>
-        </ul>
-        {isSearchShow && <Search isSearch={isSearchHandler}/>}
-    </div>
-);
+            <div className="mt-2">
+                <ul>
+                    <ListItem title="Trending" icon={<RiFireLine className="dark:text-white" />} />
+                    <ListItem title="New Releases" icon={<FiFolderPlus className="dark:text-white" />} />
+                    <ListItem title="Coming Soon" icon={<GiOldMicrophone className="dark:text-white" />} />
+                    <ListItem title="Favorites" icon={<FaRegHeart className="dark:text-white" />} />
+                </ul>
+            </div>
+
+
+
+            {/* {isSearchShow ? <Search /> : ""} */}
+            {isSearchShow && <Search isSearch={isSearchHandler} />}
+
+        </div>
+    );
 }
 
 export default LeftSidebar;

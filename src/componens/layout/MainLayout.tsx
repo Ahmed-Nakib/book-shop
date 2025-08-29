@@ -1,3 +1,4 @@
+
 import ProductList from "../../features/product/ProductList";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -7,13 +8,12 @@ function MainLayout() {
     return (
         <>
             <Header />
-                <div className="h-[calc-(100vh-100px)]">
-                    <div className="flex relative h-[calc(100vh-100px)]">
-                        <LeftSidebar/>
-                        <ProductList/>
-
-                    </div>
+            <div className="">
+                <div className="flex relative h-[calc(100vh-100px)]">
+                    <LeftSidebar />
+                    <ProductList></ProductList>
                 </div>
+            </div>
             <Footer />
         </>
     );
